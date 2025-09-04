@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - RuangJuang</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+   @vite(['resources/css/login.css', 'resources/js/login.js'])
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,7 +26,7 @@
             
             <div class="relative z-10 flex flex-col justify-center h-full">
                 <div class="mb-6 flex justify-center">
-                    <img src="logo.png" alt="Logo RuangJuang" class="h-20 object-contain animate-float">
+                    <img src="{{ asset('images/logo.jpg') }}" alt="Logo RuangJuang" class="h-20 object-contain animate-float">
                 </div>
                 <p class="text-xl mb-8 text-white/90 text-center">Tempat terbaik untuk mencapai impian dan tujuan Anda</p>
                 
@@ -117,7 +117,7 @@
                 
                 <div class="mt-8 text-center">
                     <p class="text-gray-600">Belum punya akun? 
-                        <a href="#" class="text-primary-light hover:text-primary-dark font-medium transition duration-300">Daftar sekarang</a>
+                        <a href="{{ route('register') }}" class="text-primary-light hover:text-primary-dark font-medium transition duration-300">Daftar sekarang</a>
                     </p>
                 </div>
             </div>

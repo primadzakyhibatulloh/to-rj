@@ -1,6 +1,5 @@
 import gsap from "gsap";
 
-// Menambahkan delay untuk animasi
 document.querySelectorAll('.animate-pulse').forEach((el, index) => {
     el.style.animationDelay = `${index * 500}ms`;
 });
