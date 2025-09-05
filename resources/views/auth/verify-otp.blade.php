@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - RuangJuang</title>
+    <title>Verifikasi OTP - RuangJuang</title>
 
-   @vite(['resources/css/login.css', 'resources/js/login.js'])
+    @vite(['resources/css/auth/verify-otp.css', 'resources/js/auth/verify-otp.js'])
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -55,69 +55,45 @@
         
         <div class="md:w-3/5 p-12 bg-white/80">
             <div class="py-4">
-                <h2 class="text-4xl font-bold text-primary-dark mb-2">Selamat Datang</h2>
-                <p class="text-gray-600 mb-10">Silakan masuk ke akun RuangJuang Anda</p>
+                <h2 class="text-4xl font-bold text-primary-dark mb-2">Verifikasi Kode OTP</h2>
+                <p class="text-gray-600 mb-6">
+                    Kami telah mengirimkan kode OTP ke alamat email Anda. Silakan masukkan kode di bawah ini.
+                </p>
                 
-                <form class="space-y-6" id="loginForm">
+                <form class="space-y-6" id="otpVerificationForm">
                     <div class="space-y-2">
-                        <label class="block text-gray-700 font-medium" for="email">
-                            <i class="fas fa-envelope text-primary-light mr-2"></i>Email
+                        <label class="block text-gray-700 font-medium" for="otp">
+                            <i class="fas fa-key text-primary-light mr-2"></i>Kode OTP
                         </label>
                         <div class="relative">
                             <input 
-                                id="email" 
-                                type="email" 
-                                placeholder="Masukkan alamat email" 
-                                class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light transition duration-300"
+                                id="otp" 
+                                type="text" 
+                                placeholder="Masukkan 6 digit kode OTP" 
+                                class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg text-center font-bold text-xl tracking-widest focus:outline-none focus:ring-2 focus:ring-primary-light transition duration-300"
                                 required
+                                maxlength="6"
                             >
-                            <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <i class="fas fa-key absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                         </div>
-                    </div>
-                    
-                    <div class="space-y-2">
-                        <div class="flex justify-between">
-                            <label class="block text-gray-700 font-medium" for="password">
-                                <i class="fas fa-lock text-primary-light mr-2"></i>Password
-                            </label>
-                            <a href="#" class="text-sm text-primary-light hover:text-primary-dark transition duration-300">Lupa password?</a>
-                        </div>
-                        <div class="relative">
-                            <input 
-                                id="password" 
-                                type="password" 
-                                placeholder="Masukkan kata sandi" 
-                                class="w-full px-4 py-3 pl-10 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light transition duration-300"
-                                required
-                            >
-                            <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                            <button type="button" id="togglePassword" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center">
-                        <input 
-                            id="remember" 
-                            type="checkbox" 
-                            class="h-4 w-4 text-primary-light focus:ring-primary-light border-gray-300 rounded"
-                        >
-                        <label for="remember" class="ml-2 block text-sm text-gray-700">Ingat saya</label>
                     </div>
                     
                     <button 
                         type="submit" 
                         class="w-full bg-primary-light hover:bg-primary-dark text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center"
-                        id="loginButton"
+                        id="verifyButton"
                     >
-                        <i class="fas fa-sign-in-alt mr-2"></i> Masuk
+                        <i class="fas fa-check-circle mr-2"></i> Verifikasi
                     </button>
+
+                    <p class="text-center text-sm text-gray-500 mt-4">
+                        Tidak menerima kode? <a href="#" id="resendOtp" class="text-primary-light hover:text-primary-dark font-medium transition duration-300">Kirim ulang</a>
+                    </p>
                 </form>
                 
                 <div class="mt-8 text-center">
-                    <p class="text-gray-600">Belum punya akun? 
-                        <a href="{{ route('register') }}" class="text-primary-light hover:text-primary-dark font-medium transition duration-300">Daftar sekarang</a>
+                    <p class="text-gray-600">
+                        <a href="{{ route('password.request') }}" class="text-primary-light hover:text-primary-dark font-medium transition duration-300"><i class="fas fa-arrow-left mr-2"></i> Kembali</a>
                     </p>
                 </div>
             </div>
