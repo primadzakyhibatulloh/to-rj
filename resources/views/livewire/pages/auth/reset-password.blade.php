@@ -10,7 +10,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
+new #[Layout('layouts.guest', ['vite_assets' => ['resources/css/auth/new-password.css', 'resources/js/auth/new-password.js']])] class extends Component
 {
     #[Locked]
     public string $token = '';
@@ -69,37 +69,76 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
-    <form wire:submit="resetPassword">
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<div class="py-4">
+    <h2 class="text-4xl font-bold text-primary-dark mb-2">Reset Password</h2>
+    <p class="text-gray-600 mb-10">Masukkan kata sandi baru untuk akun Anda.</p>
+
+    <x-auth-session-status class="mb-4 p-4 bg-green-100 text-green-700 rounded-lg border border-green-200" :status="session('status')" />
+
+    <form wire:submit="resetPassword" class="space-y-6">
+        <div class="space-y-2">
+            <label class="block text-gray-700 font-medium" for="email">
+                <i class="fas fa-envelope text-primary-light mr-2"></i>Email
+            </label>
+            <div class="relative">
+                <input 
+                    wire:model="email"
+                    id="email" 
+                    type="email" 
+                    placeholder="Masukkan alamat email" 
+                    class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light transition duration-300"
+                    required
+                    autofocus
+                    autocomplete="username"
+                />
+                <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            </div>
+            <x-input-error :messages="$errors->get('email')" class="mt-2 text-sm" />
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input wire:model="password" id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div class="space-y-2">
+            <label class="block text-gray-700 font-medium" for="password">
+                <i class="fas fa-lock text-primary-light mr-2"></i>Password
+            </label>
+            <div class="relative">
+                <input 
+                    wire:model="password"
+                    id="password" 
+                    type="password" 
+                    placeholder="Buat kata sandi baru"
+                    class="w-full px-4 py-3 pl-10 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light transition duration-300"
+                    required
+                    autocomplete="new-password" 
+                />
+                <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            </div>
+            <x-input-error :messages="$errors->get('password')" class="mt-2 text-sm" />
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                          type="password"
-                          name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        <div class="space-y-2">
+            <label class="block text-gray-700 font-medium" for="password_confirmation">
+                <i class="fas fa-lock text-primary-light mr-2"></i>Konfirmasi Password
+            </label>
+            <div class="relative">
+                <input 
+                    wire:model="password_confirmation"
+                    id="password_confirmation" 
+                    type="password" 
+                    placeholder="Ketik ulang kata sandi baru" 
+                    class="w-full px-4 py-3 pl-10 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light transition duration-300"
+                    required
+                    autocomplete="new-password"
+                />
+                <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            </div>
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 text-sm" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
+        <button 
+            type="submit" 
+            class="w-full bg-primary-light hover:bg-primary-dark text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center mt-6"
+        >
+            <i class="fas fa-key mr-2"></i> Reset Password
+        </button>
     </form>
 </div>

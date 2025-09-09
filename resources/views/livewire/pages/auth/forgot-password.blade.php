@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Password;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
+new #[Layout('layouts.guest', ['vite_assets' => ['resources/css/auth/reset-password.css', 'resources/js/auth/reset-password.js']])] class extends Component
 {
     public string $email = '';
 
@@ -75,7 +75,7 @@ new #[Layout('layouts.guest')] class extends Component
         
         <div class="mt-8 text-center">
             <p class="text-gray-600">
-                <a href="{{ route('login') }}" class="text-primary-light hover:text-primary-dark font-medium transition duration-300"><i class="fas fa-arrow-left mr-2"></i> Kembali ke halaman Login</a>
+                <a href="{{ route('login') }}" class="text-primary-light hover:text-primary-dark font-medium transition duration-300" wire:navigate><i class="fas fa-arrow-left mr-2"></i> Kembali ke halaman Login</a>
             </p>
         </div>
     </div>

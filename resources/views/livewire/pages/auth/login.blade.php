@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
+new #[Layout('layouts.guest', ['vite_assets' => ['resources/css/auth/login.css', 'resources/js/auth/login.js']])] class extends Component
 {
     public LoginForm $form;
 
@@ -28,11 +28,9 @@ new #[Layout('layouts.guest')] class extends Component
     <h2 class="text-4xl font-bold text-primary-dark mb-2">Selamat Datang</h2>
     <p class="text-gray-600 mb-10">Silakan masuk ke akun RuangJuang Anda</p>
     
-    <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     
     <form wire:submit="login" class="space-y-6">
-        <!-- Email Address -->
         <div class="space-y-2">
             <label class="block text-gray-700 font-medium" for="email">
                 <i class="fas fa-envelope text-primary-light mr-2"></i>Email
@@ -53,7 +51,6 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
         </div>
         
-        <!-- Password -->
         <div class="space-y-2">
             <div class="flex justify-between">
                 <label class="block text-gray-700 font-medium" for="password">
@@ -83,7 +80,6 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
         </div>
         
-        <!-- Remember Me -->
         <div class="flex items-center">
             <input 
                 wire:model="form.remember"
@@ -111,28 +107,3 @@ new #[Layout('layouts.guest')] class extends Component
         </p>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const togglePassword = document.querySelector('#togglePassword');
-        const password = document.querySelector('#password');
-        
-        if (togglePassword && password) {
-            togglePassword.addEventListener('click', function() {
-                // Toggle the type attribute
-                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                password.setAttribute('type', type);
-                
-                // Toggle the eye icon
-                const eyeIcon = this.querySelector('i');
-                if (type === 'password') {
-                    eyeIcon.classList.remove('fa-eye-slash');
-                    eyeIcon.classList.add('fa-eye');
-                } else {
-                    eyeIcon.classList.remove('fa-eye');
-                    eyeIcon.classList.add('fa-eye-slash');
-                }
-            });
-        }
-    });
-</script>

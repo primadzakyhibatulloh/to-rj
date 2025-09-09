@@ -8,11 +8,11 @@ use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
+new #[Layout('layouts.guest', ['vite_assets' => ['resources/css/auth/register.css', 'resources/js/auth/register.js']])] class extends Component
 {
     public string $name = '';
     public string $email = '';
-    public string $phone_number = ''; // Tambahkan ini
+    public string $phone_number = '';
     public string $password = '';
     public string $password_confirmation = '';
 
@@ -24,7 +24,7 @@ new #[Layout('layouts.guest')] class extends Component
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'phone_number' => ['nullable', 'string', 'max:255', 'unique:'.User::class], // Tambahkan validasi
+            'phone_number' => ['nullable', 'string', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -45,7 +45,6 @@ new #[Layout('layouts.guest')] class extends Component
     <p class="text-sm text-gray-600 mb-6">Daftarkan diri Anda untuk memulai perjalanan belajar</p>
     
     <form wire:submit="register" class="space-y-4">
-        <!-- Name -->
         <div class="space-y-1">
             <label class="block text-gray-700 font-medium text-sm" for="name">
                 <i class="fas fa-user text-primary-light mr-1"></i>Nama Lengkap
@@ -66,7 +65,6 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-error :messages="$errors->get('name')" class="mt-2 text-sm" />
         </div>
 
-        <!-- Email Address -->
         <div class="space-y-1">
             <label class="block text-gray-700 font-medium text-sm" for="email">
                 <i class="fas fa-envelope text-primary-light mr-1"></i>Email
@@ -86,7 +84,6 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-error :messages="$errors->get('email')" class="mt-2 text-sm" />
         </div>
 
-        <!-- Phone Number -->
         <div class="space-y-1">
             <label class="block text-gray-700 font-medium text-sm" for="phone_number">
                 <i class="fas fa-phone text-primary-light mr-1"></i>Nomor HP
@@ -105,7 +102,6 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-error :messages="$errors->get('phone_number')" class="mt-2 text-sm" />
         </div>
         
-        <!-- Password -->
         <div class="space-y-1">
             <label class="block text-gray-700 font-medium text-sm" for="password">
                 <i class="fas fa-lock text-primary-light mr-1"></i>Password
@@ -128,7 +124,6 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-error :messages="$errors->get('password')" class="mt-2 text-sm" />
         </div>
 
-        <!-- Confirm Password -->
         <div class="space-y-1">
             <label class="block text-gray-700 font-medium text-sm" for="password_confirmation">
                 <i class="fas fa-lock text-primary-light mr-1"></i>Konfirmasi Password
@@ -167,47 +162,3 @@ new #[Layout('layouts.guest')] class extends Component
         </p>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Toggle Password Visibility
-        const togglePassword = document.querySelector('#togglePassword');
-        const password = document.querySelector('#password');
-        
-        if (togglePassword && password) {
-            togglePassword.addEventListener('click', function() {
-                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                password.setAttribute('type', type);
-                
-                const eyeIcon = this.querySelector('i');
-                if (type === 'password') {
-                    eyeIcon.classList.remove('fa-eye-slash');
-                    eyeIcon.classList.add('fa-eye');
-                } else {
-                    eyeIcon.classList.remove('fa-eye');
-                    eyeIcon.classList.add('fa-eye-slash');
-                }
-            });
-        }
-        
-        // Toggle Confirm Password Visibility
-        const toggleConfirmPassword = document.querySelector('#toggleConfirmPassword');
-        const confirmPassword = document.querySelector('#password_confirmation');
-        
-        if (toggleConfirmPassword && confirmPassword) {
-            toggleConfirmPassword.addEventListener('click', function() {
-                const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-                confirmPassword.setAttribute('type', type);
-                
-                const eyeIcon = this.querySelector('i');
-                if (type === 'password') {
-                    eyeIcon.classList.remove('fa-eye-slash');
-                    eyeIcon.classList.add('fa-eye');
-                } else {
-                    eyeIcon.classList.remove('fa-eye');
-                    eyeIcon.classList.add('fa-eye-slash');
-                }
-            });
-        }
-    });
-</script>
