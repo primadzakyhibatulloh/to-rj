@@ -6,7 +6,7 @@
     <title>Ruang Juang | Bimbel Persiapan Tes Kedinasan dan CPNS</title>
     
     @vite(['resources/css/homepage.css', 'resources/js/homepage.js'])
-
+    <link rel="shortcut icon" href="{{ asset('images/logorj.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
